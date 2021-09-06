@@ -1,6 +1,7 @@
 use employees;
 
-INSERT INTO department (name)
+INSERT INTO department 
+(name)
 VALUES
     ('Executive'),
     ('Engineering'),
@@ -21,11 +22,11 @@ INSERT INTO role
 INSERT INTO employee
     (first_name, last_name, role_id, manager_id)
 VALUES
-    ('Julio', 'Sanchez', 1, NULL),
-    ('Mike', 'Jones', 2, NULL),
-    ('Jim', 'Rodriguez', 3, NULL),
-    ('Justin', 'Pickles', 4, 3),
-    ('Andrew', 'Colon', 5, 1,
-    ('Jaime', 'Bue', 6, 2),
-    ('Kathy', 'Liam', 7, 1),
-    ('Tiff', 'Mendoza', 8, 2);
+    ('John', 'Doe', 1, NULL),
+    ('Mike', 'Chan', 2, 1),
+    ('Ashley', 'Rodriguez', 3, NULL),
+    ('Kevin', 'Tupik', 4, 3),
+    ('Kunal', 'Singh', 5, NULL),
+    ('Malia', 'Brown', 6, 5),
+    ('Sarah', 'Lourd', 7, NULL),
+    ('Tom', 'Allen', 8, 7);
