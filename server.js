@@ -159,3 +159,151 @@ function addEmployee() {
       );
     });
 }
+
+function getRoles() {
+  let roles = [];
+  connection.query("SELECT title FROM role", (error, response) => {
+    if (error) throw error;
+
+    response.forEach((role) => {
+      roles.push(role.title);
+    });
+  });
+
+  return roles;
+}
+
+function getManager() {
+  let firstNames = [];
+  let lastNames = [];
+  let employees = [];
+
+  connection.query("SELECT first_name FROM employee", (error, response) => {
+    if (error) throw error;
+
+    response.forEach((first_name) => {
+      firstNames.push(first_name.first_name);
+    });
+
+    connection.query("SELECT last_name FROM employee", (error, response) => {
+      if (error) throw error;
+
+      response.forEach((last_name) => {
+        lastNames.push(last_name.last_name);
+      });
+
+      for (var i = 0; i < firstNames.length; i++) {
+        employees[i] = firstNames[i] + " " + lastNames[i];
+      }
+    });
+  });
+
+  return employees;
+}
+
+function updateRole() {
+  inquirer
+    .prompt([
+      {
+        name: "employee",
+        type: "number",
+        message: "Enter the employee ID of the employee you wish to update:",
+      },
+      {
+        name: "role",
+        type: "number",
+        message: "Enter the role ID you wish to update the employee to:",
+      },
+    ])
+    .then((response) => {
+      connection.query(
+        "UPDATE employee SET role_id = ? WHERE id = ? ",
+        [response.role, response.employee],
+        (error, result) => {
+          if (error) throw error;
+
+          viewAllEmployees();
+        }
+      );
+    });
+}
+
+function viewRoles() {
+  connection.query("SELECT * FROM role", (error, result) => {
+    if (error) throw error;
+
+    console.log("\nRoles");
+    console.table(result);
+
+    start();
+  });
+}
+
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        name: "name",
+        type: "input",
+        message: "Enter the role name: ",
+      },
+      {
+        name: "salary",
+        type: "number",
+        message: "Enter the salary: ",
+        validate: (salary) => {
+          if (salary) {
+            return true;
+          } else {
+            console.log("Please enter a number!");
+            return false;
+          }
+        },
+      },
+      {
+        name: "department",
+        type: "list",
+        message: "Select the department:",
+        choices: getDepartments(),
+      },
+    ])
+    .then((response) => {
+      var responseID = 0;
+
+      connection.query(
+        "SELECT id FROM department WHERE name = ?",
+        [response.department],
+        (error, result) => {
+          if (error) throw error;
+          result.forEach((id) => {
+            responseID = id.id;
+          });
+
+          connection.query(
+            "INSERT INTO role SET ?",
+            {
+              title: response.name,
+              salary: response.salary,
+              department_id: responseID,
+            },
+            (error, result) => {
+              if (error) throw error;
+            }
+          );
+
+          viewRoles();
+        }
+      );
+    });
+}
+
+function viewDepartments() {
+  connection.query("SELECT * FROM department", (error, result) => {
+    if (error) throw error;
+
+    console.log("\nDepartments");
+    console.table(result);
+
+    start();
+  });
+}
