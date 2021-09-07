@@ -307,3 +307,44 @@ function viewDepartments() {
     start();
   });
 }
+
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "name",
+        type: "input",
+        message: "Enter the department name: ",
+      },
+    ])
+    .then((response) => {
+      connection.query(
+        "INSERT INTO department(name) VALUES (?)",
+        [response.name],
+        (error, result) => {
+          if (error) throw error;
+        }
+      );
+
+      viewDepartments();
+    });
+}
+
+function getDepartments() {
+    let departments = [];
+    connection.query('SELECT name FROM department', (error, response) => {
+        if (error) throw error;
+
+        response.forEach(department => {
+            departments.push(department.name);
+        })
+    })
+
+    return departments;
+}
+
+connection.connect(err => {
+    if (err) throw err;
+
+    start();
+  })
