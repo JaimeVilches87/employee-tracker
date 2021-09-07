@@ -83,13 +83,11 @@ function addEmployee() {
       {
         name: "firstName",
         type: "input",
-        default: "Joe",
         message: "Enter the employee's first name: ",
       },
       {
         name: "lastName",
         type: "input",
-        default: "Shmoe",
         message: "Enter the employee's last name: ",
       },
       {

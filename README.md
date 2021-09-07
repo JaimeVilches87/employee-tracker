@@ -39,8 +39,8 @@ You may wish to run db/schema.sql and /db/seeds.sql files to create the database
 
 Testing the application <br>
 Google Drive video:
-https://drive.google.com/file/d/1xKRGwauulp4PjRhmnmvMgscrbkPlx7XJ/view?usp=sharing
 
+https://drive.google.com/file/d/1B_HTL-ZQwYSY9W5gv4U8XwGcpeFATx10/view
 
 <a name="questions"></a>
 ## 4. Questions
