@@ -27,7 +27,7 @@ This is a command line application that runs on Node.js and uses SQL, Inquirer a
 
 Open your favorite web browser and enter the following web address to access repo.
 
-https://jaimevilches87.github.io/employee-tracker/
+https://github.com/JaimeVilches87/employee-tracker.git
 
 <a name="usage"></a>
 ## 3. Usage Tips
